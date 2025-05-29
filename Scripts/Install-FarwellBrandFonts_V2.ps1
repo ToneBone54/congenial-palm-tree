@@ -3,10 +3,12 @@ $promptUri = 'https://github.com/google/fonts/raw/refs/heads/main/ofl/prompt/'
 
 $geologicaUri = 'https://github.com/google/fonts/raw/refs/heads/main/ofl/geologica/'
 
-# Queries the fonts folder to see if Prompt and Geologica already exist
+# Queries the fonts folder to see if Prompt and Geologica already exist and gathers their absolute paths in one variable
 $fontCheck = Get-ChildItem -path "C:\Windows\Fonts" -Include ('Prompt*.ttf', 'Geologica*.ttf') -Recurse
 
-
+# Checks each font path to see if it exists.
+# If each font exists, it exits the script early.
+# If not, it continues
 foreach ($font in $fontCheck){
     if (test-path $font){
         Write-Host "Fonts already installed. Exiting..."
@@ -22,7 +24,7 @@ Write-Host "Creating temporary font destination..."
 mkdir $fontDest | out-null
 
 # Array defining params for the Invoke-WebRequest sequence that tells it which URL to look for and the output destination
-# A better explanation is that this sets multiple inputs for the -Uri and -OutFile parameters. 
+# A better explanation is that this defines inputs for the -Uri and -OutFile parameters in the Invoke-WebRequest for each font we need
 $files = @(
     @{
         Uri = "$promptUri/Prompt-Black.ttf"
