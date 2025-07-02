@@ -1,6 +1,11 @@
-#!/bin/bash
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/refs/heads/main/misc/core.func)
+#!/usr/bin/env bash
 
-color
+source func.sh
 
-printf "${RD}ERROR${CL}"
+i=0
+
+until [ $i -eq 30 ]
+do
+    echo $weird
+    i=$((i+1))
+done
