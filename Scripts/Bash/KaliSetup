@@ -1,0 +1,69 @@
+#!/bin/bash
+# This script automates the setup of Kali Linux as according to Tim
+# Lansing's Kali Setup Lab for Net Attacks. The instructions have
+# been cut down to omit some things to get up and running quick but this 
+# could change.
+
+# CHANGELOG
+# 3/17/25 4:54PM: Completed first draft
+# 3/17/25 6:32PM: Combined create_dirs with this script to make a cohesive
+# all in one setup script.
+
+# Update Kali
+
+echo "Beginning updates...."
+
+sleep 3
+
+sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y 
+
+# Install various tools
+
+packages=("gobuster" "feroxbuster" "seclists" "evolution" "guestmount" "oscanner" "sipvicious" "redis-tools" "liblzf1" "crowbar" "html2text" "dirsearch" "kali-wallpapers-2023" "cifs-utils")
+
+echo "Installing ${packages[@]}...."
+
+sudo apt install ${packages[@]} -y 
+
+echo "Verifying packages...."
+
+sleep 3
+
+for pack in "${packages[@]}"; do
+        if dpkg -l | grep -qw "$pack"; then
+                echo "$pack found"
+        else
+                echo "$pack not found"
+        fi
+done
+
+# Unzip rockyou
+sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+
+#Begin personal directory creation
+
+#Define variables for each dir
+
+HTBdir=~/HTB
+THMdir=~/THM
+Sherlocks=~/HTB/Sherlocks
+Chals=~/HTB/Challenges
+vpnconfs=~/VPNConfigs
+HTBconf=~/VPNConfigs/HTB
+THMconf=~/VPNConfigs/THM
+
+#Create directories
+
+for dir in $HTBdir $THMdir $Sherlocks $Chals $vpnconfs $HTBconf $THMconf; do
+        mkdir $dir
+done
+
+#Test paths
+
+for dir in $HTBdir $THMdir $Sherlocks $Chals $vpnconfs $HTBconf $THMconf; do
+        if [ -d $dir ]; then
+                echo "$dir verified!"
+        else
+                echo "$dir not found."
+        fi
+done
