@@ -1,5 +1,5 @@
-import random
+import random as r
 
-random.seed(11)
+meow_multiplier = r.randint(1, 20)
 
-print(random.random())
+print(meow_multiplier)
