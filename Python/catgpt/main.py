@@ -1,7 +1,15 @@
 import random as r
+import time
 
-meow_multiplier = int(r.randint(1, 20))
+# Random number that decides how many meows to print
+meow_multiplier = int(r.randint(1, 20)) 
 
-input("What would you like to ask?: ")
+# Random number of seconds 
+sleepTimer = int(r.randint(5, 25)) 
+
+input("What would you like to ask?: ") 
+
+# Time in seconds
+time.sleep(sleepTimer) 
 
 print("Meow " * meow_multiplier)
