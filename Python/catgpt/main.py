@@ -1,5 +1,7 @@
 import random as r
 
-meow_multiplier = r.randint(1, 20)
+meow_multiplier = int(r.randint(1, 20))
 
-print(meow_multiplier)
+input("What would you like to ask?: ")
+
+print("Meow " * meow_multiplier)
