@@ -1,0 +1,13 @@
+<!-- Configuration guide: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file -->
+<Configuration>
+<MappedFolders>
+    <MappedFolder>
+        <HostFolder>C:\Sandbox</HostFolder>
+        <SandboxFolder>C:\temp</SandboxFolder>
+        <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+</MappedFolders>
+<LogonCommand>
+    <Command>powershell -ExecutionPolicy RemoteSigned -command "start powershell {-File C:\temp\Sandbox-Setup.ps1}"</Command>
+</LogonCommand>
+</Configuration>
