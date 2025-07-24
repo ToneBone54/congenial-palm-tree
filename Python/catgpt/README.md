@@ -9,3 +9,12 @@ Powered by:
 - 💬 Zero-Shot Disregard™ – Responds to your prompts with minimal context and maximal sass.
 
 - 🐟 Supervised Reinforcement via Treat Feedback Loops – Optimized using fish-shaped gradient snacks.
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+*Disclaimer: This is NOT an actual AI project. This is just a silly Python project I thought of while bored.*
