@@ -8,6 +8,6 @@
     </MappedFolder>
 </MappedFolders>
 <LogonCommand>
-    <Command>powershell -ExecutionPolicy RemoteSigned -command "start powershell {-File C:\temp\Sandbox-Setup.ps1}"</Command>
+    <Command>powershell -ExecutionPolicy RemoteSigned -command "start powershell {-windowstyle hidden -File C:\temp\Sandbox-Setup.ps1}"</Command>
 </LogonCommand>
 </Configuration>
