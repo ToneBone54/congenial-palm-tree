@@ -4,3 +4,7 @@ These are some files from something I did at work to automatically set up a cust
 
 
 MS article for more information: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file
+
+### NOTE:
+
+The ZIP file currently contains older versions of the WSB file and the PS script as I did some editing to those without updating the ZIP. Not having these changes won't hurt functionality, I just added a "Setup Complete" message box to the PS script because the script runs silently with the updated WSB file.
