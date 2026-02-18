@@ -1,0 +1,98 @@
+# Template for control cards on the Control panel of the Home dashboard
+
+type: custom:config-template-card
+variables:
+  # Status and last boot sensor entities formatted as JS strings. Place inside both sets of quotes. Ex: '"sensor.qemu_kali_106_status"'
+  STATUS_ENTITY: '""'
+  LAST_BOOT: '""'
+  # The device id can be found on the device page URL. Ex: http://<HA URL>:8123/config/devices/device/<device string>
+  DEVICE_ID: '""'
+entities:
+  # Spaces for the actual status and last boot entity strings as formatted by Home Assistant
+  - 
+  - 
+card:
+  type: vertical-stack
+  cards:
+    - type: horizontal-stack
+      cards:
+        - type: custom:mushroom-title-card
+          # VM Name
+          subtitle: 
+        - type: custom:mushroom-chips-card
+          chips:
+            - type: template
+              entity: ${STATUS_ENTITY}
+              icon: |-
+                {% if is_state(entity, "running") %}
+                  mdi:play
+                {% elif is_state(entity, "suspended") %}
+                  mdi:pause
+                {% else %}
+                  mdi:stop
+                {% endif %}
+              icon_color: |-
+                {% if is_state(entity, "running") %}
+                  green
+                {% elif is_state(entity, "suspended") %}
+                  yellow
+                {% else %}
+                  red
+                {% endif %}
+              content: "{{ states(entity) }}"
+            - type: entity
+              entity: ${LAST_BOOT}
+    - type: custom:auto-entities
+      filter:
+        include:
+          - options:
+              type: tile
+              hide_state: true
+            device: ${DEVICE_ID}
+            label: "on"
+        exclude: []
+      show_empty: true
+      card_param: cards
+      card:
+        square: false
+        type: grid
+      visibility:
+        - condition: state
+          entity: ${STATUS_ENTITY}
+          state: stopped
+    - type: custom:auto-entities
+      filter:
+        include:
+          - options:
+              type: tile
+              hide_state: true
+            device: ${DEVICE_ID}
+            label: "off"
+        exclude: []
+      card:
+        square: false
+        type: grid
+      show_empty: true
+      card_param: cards
+      visibility:
+        - condition: state
+          entity: ${STATUS_ENTITY}
+          state: running
+    - type: custom:auto-entities
+      filter:
+        include:
+          - options:
+              type: tile
+              hide_state: true
+            device: ${DEVICE_ID}
+            label: while_suspended
+        exclude: []
+      show_empty: true
+      card_param: cards
+      card:
+        square: false
+        type: grid
+      visibility:
+        - condition: state
+          entity: ${STATUS_ENTITY}
+          state: suspended
