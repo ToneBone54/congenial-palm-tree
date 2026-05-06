@@ -9,6 +9,9 @@
 # 3/17/25 6:32PM: Combined create_dirs with this script to make a cohesive
 # all in one setup script.
 
+# USAGE
+# wget -qO- https://github.com/ToneBone54/congenial-palm-tree/raw/refs/heads/main/Scripts/Bash/KaliSetup | bash
+
 # Update Kali
 
 echo "Beginning updates...."
@@ -38,6 +41,7 @@ for pack in "${packages[@]}"; do
 done
 
 # Unzip rockyou
+echo "Unzipping rockyou.txt..."
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 
 #Begin personal directory creation
