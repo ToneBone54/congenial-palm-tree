@@ -18,6 +18,8 @@ echo "Beginning updates...."
 
 sleep 3
 
+export DEBIAN_FRONTEND=noninteractive
+
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y 
 
 # Install various tools
