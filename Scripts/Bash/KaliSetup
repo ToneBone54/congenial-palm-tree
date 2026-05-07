@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 # This script automates the setup of Kali Linux as according to Tim
 # Lansing's Kali Setup Lab for Net Attacks. The instructions have
 # been cut down to omit some things to get up and running quick but this 
@@ -13,26 +14,23 @@
 # wget -qO- https://github.com/ToneBone54/congenial-palm-tree/raw/refs/heads/main/Scripts/Bash/KaliSetup | bash
 
 # Update Kali
+echo -e "Beginning updates...."
+sleep 2
+sudo apt-get update
 
-echo "Beginning updates...."
-
-sleep 3
-
-export DEBIAN_FRONTEND=noninteractive
-
-sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y 
+# This command will only update currently installed packages. More work will be needed if we want to include dist/full-upgrade
+# DEBIAN_FRONTEND is configured to prevent any input prompts from breaking the script flow
+sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+sudo apt-get autoremove -y
 
 # Install various tools
-
 packages=("gobuster" "feroxbuster" "seclists" "evolution" "guestmount" "oscanner" "sipvicious" "redis-tools" "liblzf1" "crowbar" "html2text" "dirsearch" "kali-wallpapers-2023" "cifs-utils")
+echo -e "\nInstalling ${packages[@]}..."
+sleep 2
+sudo apt-get install ${packages[@]} -y 
 
-echo "Installing ${packages[@]}...."
-
-sudo apt install ${packages[@]} -y 
-
-echo "Verifying packages...."
-
-sleep 3
+echo -e "\nVerifying packages..."
+sleep 2
 
 for pack in "${packages[@]}"; do
         if dpkg -l | grep -qw "$pack"; then
@@ -43,13 +41,13 @@ for pack in "${packages[@]}"; do
 done
 
 # Unzip rockyou
-echo "Unzipping rockyou.txt..."
+echo -e "\nUnzipping rockyou.txt..."
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 
 #Begin personal directory creation
+echo -e "\nChecking for practice directories..."
 
 #Define variables for each dir
-
 HTBdir=~/HTB
 THMdir=~/THM
 Sherlocks=~/HTB/Sherlocks
@@ -59,17 +57,11 @@ HTBconf=~/VPNConfigs/HTB
 THMconf=~/VPNConfigs/THM
 
 #Create directories
-
-for dir in $HTBdir $THMdir $Sherlocks $Chals $vpnconfs $HTBconf $THMconf; do
-        mkdir $dir
-done
-
-#Test paths
-
 for dir in $HTBdir $THMdir $Sherlocks $Chals $vpnconfs $HTBconf $THMconf; do
         if [ -d $dir ]; then
-                echo "$dir verified!"
+                echo "$dir found!"
         else
-                echo "$dir not found."
+                echo "$dir not found. Creating..."
+                mkdir $dir
         fi
 done
