@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "alias dps='docker ps'
+echo -n "alias dps='docker ps'
 alias drm='docker rm'
 alias dimage='docker image'
 alias dcompose='docker compose'
